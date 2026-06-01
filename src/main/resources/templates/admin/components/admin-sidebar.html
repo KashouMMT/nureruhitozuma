@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+	<th:block th:fragment="admin-sidebar(username)">
+		<div id="layoutSidenav_nav">
+			<nav class="sb-sidenav accordion sb-sidenav-dark"
+				id="sidenavAccordion">
+				<div class="sb-sidenav-menu">
+					<div class="nav">
+						<div class="sb-sidenav-menu-heading" th:text="#{nav.core}"></div>
+						<a class="nav-link"
+							th:href="@{/{lang}/admin/dashboard(lang=${#locale.language})}">
+							<span class="sb-nav-link-icon"> <i
+								class="fas fa-tachometer-alt"></i> <span
+								th:text="#{nav.dashboard}"></span>
+						</span>
+						</a> <a class="nav-link"
+							th:href="@{/{lang}/admin/product(lang=${#locale.language})}">
+							<span class="sb-nav-link-icon"> <i class="fas fa-columns"></i>
+								<span th:text="#{nav.casts}"></span>
+						</span>
+						</a> <a class="nav-link"
+							th:href="@{/{lang}/admin/category(lang=${#locale.language})}">
+							<span class="sb-nav-link-icon"> <i
+								class="fas fa-book-open"></i> <span th:text="#{nav.categories}"></span>
+						</span>
+						</a> 
+						<a class="nav-link"
+							th:href="@{/{lang}/admin/schedule(lang=${#locale.language})}">
+							<span class="sb-nav-link-icon"> <i class="fas fa-solid fa-alarm-clock"></i> <span th:text="#{nav.schedule}"></span>
+						</span>
+						</a> 
+						<a class="nav-link"
+							th:href="@{/{lang}/admin/blog(lang=${#locale.language})}"> <span
+							class="sb-nav-link-icon"> <i class="fa-solid fa-blog"></i>
+								<span th:text="#{nav.blogs}"></span>
+						</span>
+						</a>
+						<a class="nav-link"
+							th:href="@{/{lang}/admin/announcement(lang=${#locale.language})}">
+							<span class="sb-nav-link-icon"> <i
+								class="fa-solid fa-bullhorn"></i> <span
+								th:text="#{nav.announcement}"></span>
+						</span>
+						</a> 
+						<!-- 
+						<a class="nav-link"
+							th:href="@{/{lang}/admin/chat(lang=${#locale.language})}"> <span
+							class="sb-nav-link-icon"> <i class="fa-solid fa-comment"></i>
+								<span th:text="#{nav.chat}"></span>
+						 -->
+						</span>
+						</a> <a class="nav-link"
+							th:href="@{/{lang}/admin/user(lang=${#locale.language})}"> <span
+							class="sb-nav-link-icon"> <i class="fa-solid fa-user-tie"></i>
+								<span th:text="#{nav.users}"></span>
+						</span>
+						</a> <a class="nav-link"
+							th:href="@{/{lang}/admin/user-admin(lang=${#locale.language})}">
+							<span class="sb-nav-link-icon"> <i
+								class="fa-solid fa-server"></i> <span th:text="#{nav.admins}"></span>
+						</span>
+						</a> <a class="nav-link"
+							th:href="@{/{lang}/home(lang=${#locale.language})}"> <span
+							class="sb-nav-link-icon"> <i class="fa-solid fa-house"></i>
+								<span th:text="#{nav.to-home-page}"></span>
+						</span>
+						</a>
+						<form th:action="@{/auth/logout}" method="post" class="m-0 p-0">
+							<input type="hidden" th:name="${_csrf.parameterName}"
+								th:value="${_csrf.token}">
+							<button type="submit"
+								class="btn btn-link text-light text-decoration-none d-flex align-items-center gap-2">
+								<i class="fa-solid fa-right-from-bracket"></i> <span
+									th:text="#{nav.logout}"></span>
+							</button>
+						</form>
+					</div>
+				</div>
+				<div class="sb-sidenav-footer">
+					<div class="small" th:text="#{nav.logged-in-as}"></div>
+					<span th:text="${username}"></span>
+				</div>
+			</nav>
+		</div>
+	</th:block>
+</body>
+
+</html>

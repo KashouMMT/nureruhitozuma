@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<th:block th:fragment="admin-table">
+	<main>
+		<div class="container-fluid px-4">
+			<h1 class="mt-4" th:text="#{nav.users}"></h1>
+			<ol class="breadcrumb mb-4">
+				<li class="breadcrumb-item"><a
+					th:href="@{/{lang}/admin/dashboard(lang=${#locale.language})}"
+					th:text="#{nav.dashboard}"></a></li>
+				<li class="breadcrumb-item active" th:text="#{nav.users}"></li>
+			</ol>
+			<div class="card mb-4">
+				<div class="card-header">
+					<i class="fas fa-table me-1"></i><span th:text="#{nav.users}"></span>
+				</div>
+				<div class="card-body">
+					<div th:if="${success}" class="alert alert-success" role="alert"
+						th:text="#{${success}}"></div>
+					<div th:if="${error}" class="alert alert-danger" role="alert"
+						th:text="#{${error}}"></div>
+					<div class="table-responsive">
+						<table id="datatablesSimple" class="d-none d-md-block d-lg-block">
+							<thead>
+								<tr>
+									<th th:text="#{admin.cast-id}">ID</th>
+									<th th:text="#{admin.category-name}">Name</th>
+									<th th:text="#{admin.user-email}">Email</th>
+									<th th:text="#{admin.user-status}">Enabled</th>
+									<th th:if="${isAdmin == null || isAdmin == false}"
+										th:text="#{admin.cast-actions}">ACTIONS</th>
+								</tr>
+							</thead>
+							<tfoot>
+								<tr>
+									<th th:text="#{admin.cast-id}">ID</th>
+									<th th:text="#{admin.category-name}">Name</th>
+									<th th:text="#{admin.user-email}">Email</th>
+									<th th:text="#{admin.user-status}">Enabled</th>
+									<th th:if="${isAdmin == null || isAdmin == false}"
+										th:text="#{admin.cast-actions}">ACTIONS</th>
+								</tr>
+							</tfoot>
+							<tbody>
+								<tr th:each="user : ${users}">
+									<td th:text="${user.id}"></td>
+									<td th:text="${user.name}"></td>
+									<td th:text="${user.email}"></td>
+									<td th:text="${user.enabled}"></td>
+									<td th:if="${isAdmin == null || isAdmin == false}"><a
+										class="fw-semibold hover-glow"
+										th:href="@{/{lang}/admin/enable-user/{id}(id=${user.id},lang=${#locale.language})}">
+											<span th:text="#{admin.enable}"></span>
+									</a> <br> <a class="fw-semibold hover-glow"
+										th:href="@{/{lang}/admin/disable-user/{id}(id=${user.id},lang=${#locale.language})}"
+										onclick="return confirm('本当に無効にしますか?')"> <span
+											th:text="#{admin.disable}"></span>
+									</a></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="table-responsive d-lg-none">
+						<table id="datatablesSimple">
+							<thead>
+								<tr>
+									<th th:text="#{admin.cast-id}">ID</th>
+									<th th:text="#{admin.category-name}">Name</th>
+									<th th:text="#{admin.user-email}">Email</th>
+									<th th:text="#{admin.user-status}">Enabled</th>
+								</tr>
+							</thead>
+							<tfoot>
+								<tr>
+									<th th:text="#{admin.cast-id}">ID</th>
+									<th th:text="#{admin.category-name}">Name</th>
+									<th th:text="#{admin.user-email}">Email</th>
+									<th th:text="#{admin.user-status}">Enabled</th>
+								</tr>
+							</tfoot>
+							<tbody>
+								<tr th:each="user : ${users}">
+									<td th:text="${user.id}"></td>
+									<td th:text="${user.name}"></td>
+									<td th:text="${user.enabled}"></td>
+									<th:block th:if="${isAdmin == null || isAdmin == false}">
+										<td><a class="fw-semibold hover-glow"
+											th:href="@{/{lang}/admin/enable-user/{id}(id=${user.id},lang=${#locale.language})}">
+												<span th:text="#{admin.enable}"></span>
+										</a> <br> <a class="fw-semibold hover-glow"
+											th:href="@{/{lang}/admin/disable-user/{id}(id=${user.id},lang=${#locale.language})}"
+											onclick="return confirm('本当に無効にしますか?')"> <span
+												th:text="#{admin.disable}"></span>
+										</a></td>
+									</th:block>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="card-footer bg-light border-0 py-4">
+					<th:block th:if="${isAdmin == null || isAdmin == false}">
+						<a
+							class="btn btn-primary px-5 py-2 shadow-sm fw-semibold rounded-pill hover-glow"
+							th:href="@{/{lang}/admin/add-user-why-not-just-redirect(lang=${#locale.language})}">
+							<span th:text="#{admin.add-user}"></span>
+						</a>
+					</th:block>
+					<th:block th:unless="${isAdmin == null || isAdmin == false}">
+						<a
+							class="btn btn-primary px-5 py-2 shadow-sm fw-semibold rounded-pill hover-glow"
+							th:href="@{/{lang}/admin/add-admin(lang=${#locale.language})}">
+							<span th:text="#{admin.add-admin-user}"></span>
+						</a>
+					</th:block>
+				</div>
+			</div>
+		</div>
+	</main>
+</th:block>
+</html>

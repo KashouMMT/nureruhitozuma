@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<th:block th:fragment="admin-table">
+	<main>
+		<div class="container-fluid px-4">
+			<h1 class="mt-4" th:text="#{nav.chat}"></h1>
+			<ol class="breadcrumb mb-4">
+				<li class="breadcrumb-item"><a
+					th:href="@{/{lang}/admin/dashboard(lang=${#locale.language})}"
+					th:text="#{nav.dashboard}"></a></li>
+				<li class="breadcrumb-item active" th:text="#{nav.chat}"></li>
+			</ol>
+			<div th:if="${success}" class="alert alert-success" role="alert"
+				th:text="${success}"></div>
+			<div class="container-fluid mt-3 p-3">
+				<div class="row h-100">
+					<div class="col-3 col-lg-3 border p-2 p-lg-3">
+						<h5 class="fw-bold mb-3" th:text="#{nav.chat}"></h5>
+						<hr />
+						<div th:each="chat : ${chats}"
+							class="chat-item d-flex align-items-center p-2 rounded-3 mb-2 hover-bg"
+							th:classappend="${currentRoomId == chat.roomId ? 'active' : ''}">
+							<a
+								th:href="@{/{lang}/admin/chat/{roomId}(roomId=${chat.roomId},lang=${#locale.language})}"
+								class="flex-grow-1 ms-lg-2 text-reset text-decoration-none">
+								<span th:text="${chat.senderId}"
+								class="fw-semibold text-truncate"></span> <small
+								th:text="${#strings.length(chat.content) > 10 ? #strings.substring(chat.content, 0, 10) + '...' : chat.content}"
+								class="text-truncate d-block"></small>
+							</a> <small th:text="${#temporals.format(chat.sentAt, 'HH:mm')}"
+								class="ms-2 d-none d-lg-inline"></small>
+						</div>
+					</div>
+					<div th:if="${messages != null}"
+						class="col-9 col-lg-9 border d-flex flex-column p-0">
+						<!-- Chat Header -->
+						<div class="p-3 border-bottom d-flex align-items-center">
+							<div>
+								<div class="fw-bold" th:text="${receiverId}"></div>
+								<!-- 
+				            <small>Online</small>
+				          	 -->
+							</div>
+						</div>
+
+						<!-- Chat Messages -->
+						<div id="chat-messages"
+							class="flex-grow-1 overflow-auto p-4 text-white"
+							th:attr="data-room-id=${currentRoomId}, data-peer-id=${receiverId}, data-user-id=${currentUserId}">
+							<div th:each="msg : ${messages}"
+								th:class="'d-flex mb-3 ' + (${msg.senderId} == ${currentUserId} ? 'justify-content-end' : 'align-items-start')">
+
+								<div class="d-flex flex-column align-items-end">
+									<div class="p-3 rounded-3 shadow-sm"
+										th:style="${msg.senderId} == ${currentUserId} ? 'background:#002766;' : 'background:#6c757d;'">
+										<p class="mb-0" th:text="${msg.content}"></p>
+									</div>
+									<small th:if="${msg.senderId} == ${currentUserId}"
+										class="d-block mt-1 text-end text-black"
+										th:text="${msg.status}"></small>
+								</div>
+							</div>
+						</div>
+
+						<!-- Chat Input -->
+						<div class="border-top p-3 mt-auto">
+							<div class="input-group">
+								<input id="chat-input" type="text" class="form-control"
+									th:placeholder="#{admin.chat.placeholder}">
+								<button id="chat-send-btn" class="btn btn-primary" type="button"
+									th:text="#{nav.chat}"></button>
+							</div>
+						</div>
+					</div>
+
+					<div th:unless="${messages != null}"
+						class="col-9 col-lg-9 border d-flex flex-column p-0">
+						<!-- Chat Header -->
+						<div class="p-3 border-bottom d-flex align-items-center">
+							<div>
+								<div class="fw-bold" th:text="#{nav.chat}"></div>
+								<small th:text="#{admin.chat.text}"></small>
+							</div>
+						</div>
+
+						<!-- Chat Messages -->
+						<div class="flex-grow-1 overflow-auto p-4" data-room-id="room-123"
+							data-peer-id="other-user"></div>
+
+						<!-- Chat Input -->
+						<div class="border-top p-3 mt-auto">
+							<div class="input-group">
+								<input type="text" class="form-control"
+									th:placeholder="#{admin.chat.placeholder}">
+								<button class="btn btn-primary" type="button"
+									th:text="#{nav.chat}"></button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+</th:block>
+</html>

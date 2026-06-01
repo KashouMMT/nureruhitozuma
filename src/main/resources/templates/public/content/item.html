@@ -1,0 +1,94 @@
+<th:block xmlns:th="http://www.thymeleaf.org" th:fragment="public-item">
+	<div id="wrapper" class="clear subpage-wrapper">
+		<div class="fxnav" data-nav-shell="">
+			<nav data-nav="">
+				<ul class="topnav clear">
+					<li><a th:href="@{/{lang}/home(lang=${#locale.language})}">トップページ</a></li>
+					<li><a th:href="@{/{lang}/home/schedule(lang=${#locale.language})}">本日の出勤</a></li>
+					<li><a th:href="@{/{lang}/home/cast(lang=${#locale.language})}">キャスト一覧</a></li>
+					<li><a th:href="@{/{lang}/home/system(lang=${#locale.language})}">料金システム</a></li>
+					<li><a th:href="@{/{lang}/home/ranking(lang=${#locale.language})}">ランキング</a></li>
+					<li><a th:href="@{/{lang}/home/newcomer(lang=${#locale.language})}">新人一覧</a></li>
+				</ul>
+			</nav>
+		</div>
+		<div id="contents" data-page-root="">
+			<div id="breadcrumbs">
+				<ol>
+					<li>
+						<a th:href="@{/{lang}/home(lang=${#locale.language})}">
+							<span data-shop-name="">濡れる人妻</span>
+						</a>
+					</li>
+					<li><span>詩織さん詳細</span></li>
+				</ol>
+			</div>
+
+			<div id="staffdetail" class="other staff-detail-page">
+				<h2>Cast Profile</h2>
+				<div class="section2 clear">
+					<div class="staff-detail-grid">
+						<div class="staff-detail-photo">
+							<div class="photo">
+								<div class="snsicon"></div>
+								<div class="boxicon">
+									<!--
+									<p class="newicon">
+										<img
+											src="./assets/newicon.png"
+											alt="新人マーク"
+										/>
+									</p>
+									<p class="rankicon"></p>
+									-->
+								</div>
+								<!--
+								<p class="ccicon">
+									<img src="./assets/class00.png" alt="" />
+								</p>
+								-->
+								<a th:href="@{/{lang}/home/cast/{id}(lang=${#locale.language},id=${product.id})}">
+									<img th:src="@{/files/{image}(image=${product.getMainProductImage})}"
+									class="staffimg"
+									alt="詩織" />
+								</a>
+							</div>
+						</div>
+						<div class="staff-detail-text">
+							<h3 th:text="|${product.title} (${product.age})|"></h3>
+							<!--
+							<p class="staff-copy">
+								完全業界未経験、奇跡のデビュー
+							</p>
+							-->
+							<table class="profile-table">
+								<tbody>
+									<tr>
+										<th>年齢</th>
+										<td th:text="${product.age}"></td>
+									</tr>
+									<tr>
+										<th>身長</th>
+										<td th:text="|${product.height} cm|"></td>
+									</tr>
+									
+									<tr>
+										<th>サイズ</th>
+										<td th:text="${product.cupSize}"></td>
+									</tr>
+								</tbody>
+							</table>
+							<p class="mt-3" th:utext="${product.description}">
+							</p>
+							<div class="page-actions">
+								<a th:href="@{/{lang}/home/schedule(lang=${#locale.language})}">本日の出勤</a>
+								<a th:href=@{/{lang}/home/cast(lang=${#locale.language})}>キャスト一覧</a>
+								<a th:href="@{/{lang}/home/system(lang=${#locale.language})}">料金システム</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</th:block>

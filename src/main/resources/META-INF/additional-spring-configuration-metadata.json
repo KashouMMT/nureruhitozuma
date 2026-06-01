@@ -1,0 +1,37 @@
+{"properties": [
+  {
+    "name": "security.rememberme.token-validity",
+    "type": "java.lang.Integer",
+    "description": "A description for 'security.rememberme.token-validity'"
+  },
+  {
+    "name": "security.rememberme.key",
+    "type": "java.lang.String",
+    "description": "A description for 'security.rememberme.key'"
+  },
+  {
+    "name": "app.storage.path",
+    "type": "java.lang.String",
+    "description": "A description for 'app.storage.path'"
+  },
+  {
+    "name": "app.files.public-prefix",
+    "type": "java.lang.String",
+    "description": "A description for 'app.files.public-prefix'"
+  },
+  {
+    "name": "line.bot.user-id",
+    "type": "java.lang.String",
+    "description": "A description for 'line.bot.user-id'"
+  },
+  {
+    "name": "line.bot.liff-id",
+    "type": "java.lang.String",
+    "description": "A description for 'line.bot.liff-id'"
+  },
+  {
+    "name": "line.bot.user-ids",
+    "type": "java.lang.String",
+    "description": "A description for 'line.bot.user-ids'"
+  }
+]}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+	<th:block th:fragment="admin-navbar">
+		<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+			<!-- Navbar Brand -->
+			<a th:text="#{site.title}" class="navbar-brand ps-3"
+				th:href="@{/{lang}/admin/dashboard(lang=${#locale.language})}"></a>
+
+			<!-- Sidebar Toggle -->
+			<button
+				class="btn btn-primary btn-sm order-1 order-lg-0 me-4 me-lg-0"
+				id="sidebarToggle" href="#!">
+				<i class="fas fa-bars"></i>
+			</button>
+
+			<!-- Navbar -->
+			<ul class="navbar-nav ms-auto me-3 me-lg-4 gap-3">
+				<li class="d-flex justify-content-center align-items-center">
+						<a th:href="${#strings.replace(uri, '/' + #locale.language + '/', '/en/')}">EN</a>
+						<span> / </span>
+						<a th:href="${#strings.replace(uri, '/' + #locale.language + '/', '/ja/')}">JA</a>
+						<!-- 
+						<span> / </span>
+						<a th:href="${#strings.replace(uri, '/' + lang + '/', '/ko/')}">KO</a>
+						<span> / </span>
+						<a th:href="${#strings.replace(uri, '/' + lang + '/', '/zh/')}">CN</a>
+						-->
+				</li>
+				<li><a th:text="#{nav.profile}" class="nav-link"
+					th:href="@{/{lang}/admin/profile(lang=${#locale.language})}"></a></li>
+			</ul>
+		</nav>
+	</th:block>
+</body>
+</html>

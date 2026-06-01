@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+	<th:block th:fragment="stylesheets">
+		<!-- ========== LOGO ========== -->
+		<link rel="icon" type="image/x-icon" th:href="@{/public/assets/images/logo-1.jpg}">
+		
+		<!-- ========== DATATABLE ========== -->
+		<link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+		
+		<!-- ========== BOOTSTRAP ========== -->
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+		
+		<!-- ========== QUILL TEXT EDITOR ========== -->
+		<link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
+		<script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+		
+		<!-- ========== STOMP SOCK JS ========== -->
+		<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/stompjs@2.3.3/lib/stomp.min.js"></script>
+		
+		<!-- ========== FLATPICKR CALANDER ========== -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+		
+		<!-- ========== FONTAWESOME ========== -->
+		<script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+		
+		<!-- ========== CUSTOM CSS ========== -->
+		<link th:href="@{/public/css/admin-styles.css}" rel="stylesheet">
+		<link th:href="@{/public/css/flatpickr.css}" rel="stylesheet">
+	</th:block>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<th:block xmlns:th="http://www.thymeleaf.org" th:fragment="public-home">
+	<div id="wrapper" class="clear">
+		<div class="catchbn">
+			<img
+				th:src="@{/public/assets/images/hero-main.png}"
+				alt="濡れる人妻 メインビジュアル"
+			/>
+			<div class="catch-logo">
+				<span data-shop-roman="">Nureru Hitozuma</span>
+				<small data-shop-name="">濡れる人妻</small>
+			</div>
+		</div>
+		<p class="sp-opentime" data-open-time="">受付：13:00 - 翌05:00</p>
+
+		<div class="sp-infobn infobn">
+			<p class="bell"><img th:src="@{/public/assets/images/bell.png}" alt="" /></p>
+			<button type="button" data-open-news="" data-lead-title="">
+				5月13日（水）新人入店速報！
+			</button>
+		</div>
+
+		<div class="sp-menu-grid" data-mobile-menu="">
+			<a th:href="@{/{lang}/home/schedule(lang=${#locale.language})}">
+				<span>本日の出勤</span>
+				<em>Today</em>
+			</a>
+
+			<a th:href="@{/{lang}/home/cast(lang=${#locale.language})}">
+				<span>セレブ一覧</span>
+				<em>Celeb</em>
+			</a>
+
+			<a th:href="@{/{lang}/home/system(lang=${#locale.language})}">
+				<span>料金システム</span>
+				<em>System</em>
+			</a>
+
+			<a th:href="@{/{lang}/home/ranking(lang=${#locale.language})}">
+				<span>ランキング</span>
+				<em>Rank</em>
+			</a>
+
+			<a th:href="@{/{lang}/home/newcomer(lang=${#locale.language})}">
+				<span>新人一覧</span>
+				<em>New</em>
+			</a>
+		</div>
+
+		<div class="fxnav" data-nav-shell="">
+			<nav data-nav="">
+				<ul class="topnav clear">
+					<li><a class="active" th:href="@{/{lang}/home(lang=${#locale.language})}">トップページ</a></li>
+					<li><a th:href="@{/{lang}/home/schedule(lang=${#locale.language})}">本日の出勤</a></li>
+					<li><a th:href="@{/{lang}/home/cast(lang=${#locale.language})}">キャスト一覧</a></li>
+					<li><a th:href="@{/{lang}/home/system(lang=${#locale.language})}">料金システム</a></li>
+					<li><a th:href="@{/{lang}/home/ranking(lang=${#locale.language})}">ランキング</a></li>
+					<li><a th:href="@{/{lang}/home/newcomer(lang=${#locale.language})}">新人一覧</a></li>
+				</ul>
+			</nav>
+		</div>
+
+		<div id="topcont" class="clear">
+			<div id="col_l">
+				<div class="pc-infobn infobn">
+					<p class="bell"><img th:src="@{/public/assets/images/bell.png}" alt="" /></p>
+					<button type="button" data-open-news="" data-lead-title="">
+						5月13日（水）新人入店速報！
+					</button>
+				</div>
+				<div id="pop2" data-render-campaigns=""></div>
+			</div>
+
+			<div id="col_r">
+				<div class="concept">
+					<div class="section">
+						<p><b data-concept-title="">"濡れる人妻"について</b></p>
+						<div data-render-concept="">
+							<p>
+								素人な若妻・美人妻・美熟女とのリアルな恋人体験・不倫体験ができるお店。
+							</p>
+							<p>バンコクでステキな出会いをお届けします！</p>
+							<p>
+								日本を離れて過ごす日常に、ふと心がほどけるような出会いと、自然な会話から始まるやさしい時間をお届けいたします。
+							</p>
+							<p>
+								受付方法、料金、在籍情報はバンコクでの運用に合わせて整理中です。
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="twbox">
+					<div class="section">
+						<p class="side-title">Bangkok Information</p>
+						<p>
+							受付方法、料金詳細、キャスト写真は公開前に順次更新いたします。
+						</p>
+						<p>
+							必要な変更は
+							<strong>site-data.js</strong>
+							の内容を更新すると全体へ反映されます。
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="contents">
+			<div id="breadcrumbs">
+				<ol>
+					<li>
+						<a th:href="@{/{lang}/home(lang=${#locale.language})}"
+							><span data-shop-name="">濡れる人妻</span></a
+						>
+					</li>
+					<li><span>トップページ</span></li>
+				</ol>
+			</div>
+
+			<div id="todays">
+				<h2>Todays Cast</h2>
+				<div class="section">
+					<ul class="lists clear" data-render-cast="">
+						<li th:each="schedule : ${schedules}">
+							<div class="staff">
+								<div class="photo">
+									<div class="snsicon"></div>
+									<div class="boxicon">
+										<!-- 
+										<p class="newicon">
+											<img th:src="@{/public/assets/images/newicon.png}" alt="新人マーク" />
+										</p>
+										<p class="rankicon"></p>
+										 -->
+									</div>
+									<!-- 
+									<p class="ccicon">
+										<img th:src="@{/public/assets/images/class00.png}" alt="" />
+									</p>
+									 -->
+									<a th:href="@{/{lang}/home/cast/{id}(lang=${#locale.language},id=${schedule.productId})}">
+									<img th:src="@{/files/{image}(image=${schedule.imageFilename})}"
+										class="staffimg"
+										alt="詩織" />
+									</a>
+								</div>
+
+								<div class="prof">
+									<h3 th:text="${schedule.productTitle}"></h3>
+									<p th:text="${schedule.productShortDescription}" class="size"></p>
+									<div class="tdcom" th:text="${schedule.date}"></div>
+								</div>
+							</div>
+						</li>
+						
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</th:block>

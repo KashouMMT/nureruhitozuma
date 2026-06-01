@@ -1,0 +1,117 @@
+<th:block xmlns:th="http://www.thymeleaf.org" th:fragment="public-navbar">
+	<header id="top">
+		<div class="inner">
+			<a class="mobile-home" th:href="@{/{lang}/home(lang=${#locale.language})}" aria-label="HOME">
+				<span class="home-icon"></span>
+				<strong>HOME</strong>
+			</a>
+			<h1 class="ft01" data-site-title="">
+				トップページ｜バンコク高級デリバリー「濡れる人妻」
+			</h1>
+			<a
+				class="logo text-logo"
+				th:href="@{/{lang}/home(lang=${#locale.language})}"
+				aria-label="濡れる人妻 トップ"
+			>
+				<span class="text-logo-main" data-shop-roman=""
+					>Nureru Hitozuma</span
+				>
+				<span class="text-logo-sub" data-shop-name="">濡れる人妻</span>
+			</a>
+			<p class="opentime" data-open-time="">受付：13:00 - 翌05:00</p>
+			<p class="telno" data-phone-line="">お問い合わせ準備中</p>
+			<button
+				class="mobile-menu"
+				type="button"
+				aria-label="MENU"
+				data-toggle-mobile-menu=""
+			>
+				<span></span><span></span><span></span>
+				<strong>MENU</strong>
+			</button>
+		</div>
+	</header>
+	<div class="mobile-menu-layer" aria-hidden="true" data-mobile-menu-layer="">
+		<button
+			class="mobile-menu-bg"
+			type="button"
+			aria-label="メニューを閉じる"
+			data-close-mobile-menu=""
+		></button>
+		<div
+			class="mobile-menu-card"
+			role="dialog"
+			aria-modal="true"
+			aria-label="MENU"
+		>
+			<div class="mobile-menu-logo text-logo">
+				<span class="text-logo-main" data-shop-roman=""
+					>Nureru Hitozuma</span
+				>
+				<span class="text-logo-sub" data-shop-name="">濡れる人妻</span>
+			</div>
+			<nav
+				class="mobile-menu-list"
+				aria-label="スマートフォンメニュー"
+				data-render-mobile-nav=""
+			>
+				<ul>
+					<li>
+						<a th:href="@{/{lang}/home(lang=${#locale.language})}">
+							<span>トップページ</span>
+							<em>Top</em>
+							<small>最初へ戻る</small>
+						</a>
+					</li>
+
+					<li>
+						<a th:href="@{/{lang}/home/schedule(lang=${#locale.language})}">
+							<span>本日の出勤</span>
+							<em>Today</em>
+							<small>出勤情報</small>
+						</a>
+					</li>
+
+					<li>
+						<a th:href="@{/{lang}/home/cast(lang=${#locale.language})}">
+							<span>キャスト一覧</span>
+							<em>Cast</em>
+							<small>在籍女性</small>
+						</a>
+					</li>
+
+					<li>
+						<a th:href="@{/{lang}/home/system(lang=${#locale.language})}">
+							<span>料金システム</span>
+							<em>System</em>
+							<small>ご利用料金</small>
+						</a>
+					</li>
+
+					<li>
+						<a th:href="@{/{lang}/home/ranking(lang=${#locale.language})}">
+							<span>ランキング</span>
+							<em>Rank</em>
+							<small>人気一覧</small>
+						</a>
+					</li>
+
+					<li>
+						<a th:href="@{/{lang}/home/newcomer(lang=${#locale.language})}">
+							<span>新人一覧</span>
+							<em>New</em>
+							<small>新人情報</small>
+						</a>
+					</li>
+				</ul>
+			</nav>
+			<button
+				class="mobile-menu-close"
+				type="button"
+				data-close-mobile-menu=""
+			>
+				×
+			</button>
+		</div>
+	</div>
+</th:block>

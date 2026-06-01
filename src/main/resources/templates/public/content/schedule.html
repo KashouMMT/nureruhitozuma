@@ -1,0 +1,84 @@
+<th:block xmlns:th="http://www.thymeleaf.org" th:fragment="public-schedule">
+	<div id="wrapper" class="clear subpage-wrapper">
+		<div class="fxnav" data-nav-shell="">
+			<nav data-nav="">
+				<ul class="topnav clear">
+					<li><a th:href="@{/{lang}/home(lang=${#locale.language})}">トップページ</a></li>
+					<li><a class="active" th:href="@{/{lang}/home/schedule(lang=${#locale.language})}">本日の出勤</a></li>
+					<li><a th:href="@{/{lang}/home/cast(lang=${#locale.language})}">キャスト一覧</a></li>
+					<li><a th:href="@{/{lang}/home/system(lang=${#locale.language})}">料金システム</a></li>
+					<li><a th:href="@{/{lang}/home/ranking(lang=${#locale.language})}">ランキング</a></li>
+					<li><a th:href="@{/{lang}/home/newcomer(lang=${#locale.language})}">新人一覧</a></li>
+				</ul>
+			</nav>
+		</div>
+		<div id="contents" data-page-root="">
+			<div id="breadcrumbs">
+				<ol>
+					<li>
+						<a th:href="@{/{lang}/home(lang=${#locale.language})}"
+							><span data-shop-name="">濡れる人妻</span></a
+						>
+					</li>
+					<li><span>本日の出勤</span></li>
+				</ol>
+			</div>
+
+			<div id="worklist">
+				<h2>Schedule</h2>
+				<div class="section">
+					<ul class="days7 clear">
+					    <li th:each="i : ${#numbers.sequence(0,7)}"
+					        th:class="${i == 0} ? 'today' : 'days'">
+					        <a 
+					        th:class="${i == selectedDay} ? 'active' : ''" 
+					        th:href="${i == 0}
+								? @{/{lang}/home/schedule(lang=${#locale.language})}
+							    : @{/{lang}/home/schedule(lang=${#locale.language},day=${i})}">
+							    <span th:if="${i == 0}">本日</span>
+							    <span th:unless="${i == 0}"
+							          th:text="${#temporals.format(today.plusDays(i), 'M/d(E)')}">
+							    </span>
+							</a>
+					    </li>
+					</ul>
+					<ul class="lists clear">
+						<li th:each="schedule : ${schedules}">
+							<div class="staff">
+								<div class="photo">
+									<div class="snsicon"></div>
+									<!-- 
+									<div class="boxicon">
+										<p class="newicon">
+											<img th:src="@{/public/assets/images/newicon.png}" alt="新人マーク" />
+										</p>
+										<p class="rankicon"></p>
+									</div>
+									 
+									<p class="ccicon">
+										<img
+											th:src="@{/public/assets/images/class00.png}"
+											alt=""
+										/>
+									</p>
+									-->
+									<a th:href="@{/{lang}/home/cast/{id}(lang=${#locale.language},id=${schedule.productId})}">
+										<img th:src="@{/files/{image}(image=${schedule.imageFilename})}"
+										class="staffimg"
+										alt="詩織" />
+									</a>
+								</div>
+
+								<div class="prof">
+									<h3 th:text="${schedule.productTitle}"></h3>
+									<p th:text="${schedule.productShortDescription}" class="size"></p>
+									<div th:text="${schedule.date}"class="tdcom"></div>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</th:block>

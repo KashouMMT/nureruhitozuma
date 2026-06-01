@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+
+Disallow: /en/admin/
+Disallow: /ja/admin/
+Disallow: /en/auth/
+Disallow: /ja/auth/
+Disallow: /en/user/
+Disallow: /ja/user/
+Disallow: /ws/
+Disallow: /actuator/
+Disallow: /error/
+
+Sitemap: https://en-bangkok.com/sitemap.xml

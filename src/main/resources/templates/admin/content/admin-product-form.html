@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+	<th:block th:fragment="admin-form">
+		<main>
+			<div class="container-fluid px-4">
+				<h1 class="mt-4" th:if="${formTitle}" th:text="#{${formTitle}}"></h1>
+				<h1 class="mt-4" th:unless="${formTitle}"
+					th:text="#{admin.cast.add}"></h1>
+				<ol class="breadcrumb mb-4">
+					<li class="breadcrumb-item"><a
+						th:href="@{/{lang}/admin/dashboard(lang=${#locale.language})}"
+						th:text="#{nav.dashboard}"></a></li>
+					<li class="breadcrumb-item"><a
+						th:href="@{/{lang}/admin/product(lang=${#locale.language})}"
+						th:text="#{admin.cast-table}"></a></li>
+					<li class="breadcrumb-item" th:if="${formTitle}"
+						th:text="#{${formTitle}}"></li>
+					<li class="breadcrumb-item" th:unless="${formTitle}"
+						th:text="#{admin.cast.add}"></li>
+				</ol>
+				<div class="card shadow-lg border-0 rounded-lg mt-5">
+					<div class="card-header">
+						<h3 class="font-weight-light my-4" th:if="${formTitle}"
+							th:text="${formTitle}"></h3>
+						<h3 class="font-weight-light my-4" th:unless="${formTitle}"
+							th:text="#{admin.cast.add}"></h3>
+					</div>
+					<div class="card-body">
+						<form id="variantsForm" th:action="@{${formAction}}"
+							th:object="${productDto}" method="post"
+							enctype="multipart/form-data" novalidate>
+							<div class="row mt-3 p-2" data-component="image-uploader">
+								<div class="col-12">
+									<label class="form-label fw-semibold mb-2"
+										th:text="#{admin.cast-images}"></label>
+
+									<!-- Upload box -->
+									<label class="image-upload-box w-100" data-role="dropzone">
+										<span class="d-block fs-3 fw-bold text-secondary">＋</span> <span
+										class="text-muted small" th:text="#{admin.image-instruction}"></span>
+										<input type="file" name="images" accept="image/*" multiple
+										class="d-none" data-role="input">
+									</label>
+
+									<!-- Previews (new selections) -->
+									<div class="d-flex flex-wrap gap-2 mt-2" data-role="preview"></div>
+								</div>
+							</div>
+							<div class="row mt-3 p-2">
+								<div class="col-12">
+									<th:block th:if="${productImages != null}">
+										<label class="form-label fw-semibold mb-2 mt-3"
+											th:text="#{admin.cast.prev-cast-images}"></label>
+										<div class="product-image-gallery d-flex flex-wrap gap-3 mt-2">
+											<div th:each="i : ${productImages}" class="preview-wrapper">
+												<a th:href="@{/files/{fn}(fn=${i.filename})}"
+													target="_blank" rel="noopener noreferrer"> <img
+													th:src="@{/files/{fn}(fn=${i.filename})}"
+													alt="Product image" class="preview-image">
+												</a>
+											</div>
+										</div>
+									</th:block>
+								</div>
+							</div>
+							<div class="row mt-3 p-2">
+								<div class="col-12">
+									<!-- text / number / password -->
+									<label class="form-label" for="title"
+										th:text="#{admin.cast-title}"></label> <input
+										class="form-control" type="text" th:field="*{title}"
+										maxlength="150"
+										th:classappend="${#fields.hasErrors('title')} ? ' is-invalid'">
+									<div class="invalid-feedback"
+										th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
+								</div>
+							</div>
+							<div class="row mt-3 p-2">
+								<div class="col-12">
+									<label class="form-label" for="shortDescription"
+										th:text="#{admin.cast-short-description}"></label>
+									<textarea class="form-control" rows="3"
+										th:field="*{shortDescription}" th:value="*{shortDescription}"
+										maxlength=255 required
+										th:classappend="${#fields.hasErrors('shortDescription')} ? ' is-invalid'"></textarea>
+									<div class="invalid-feedback"
+										th:if="${#fields.hasErrors('shortDescription')}"
+										th:errors="*{description}">Error</div>
+								</div>
+							</div>
+							<div class="row mt-3 p-2">
+								<div class="col-12 col-lg-4 toggle-input-wrapper">
+									<label class="form-label" th:text="#{admin.cast-age}"></label>
+									<input class="form-control" type="number" min="18" max="100"
+										step="1" required th:field="*{age}"
+										th:classappend="${#fields.hasErrors('age')} ? ' is-invalid'">
+									<div class="invalid-feedback"
+										th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></div>
+								</div>
+								<div class="col-12 col-lg-4 toggle-input-wrapper">
+									<label class="form-label" th:text="#{admin.cast-height}"></label>
+									<input class="form-control" type="number" min="1" max="9999"
+										step="1" required th:field="*{height}"
+										th:classappend="${#fields.hasErrors('height')} ? ' is-invalid'">
+									<div class="invalid-feedback"
+										th:if="${#fields.hasErrors('height')}" th:errors="*{height}"></div>
+								</div>
+								<div class="col-12 col-lg-4">
+									<select class="form-select" th:field="*{cupSize}"
+										data-type="dropdown">
+										<option selected disabled th:value="${null}"
+											th:text="#{admin.cast-size}"></option>
+										<option value="BELOW_A"
+											th:text="#{colleciton.search.cup-size.below-a}"></option>
+										<option value="A_TO_C_CUP"
+											th:text="#{colleciton.search.cup-size.a_to_c}"></option>
+										<option value="D_TO_F_CUP"
+											th:text="#{colleciton.search.cup-size.d_to_f}"></option>
+										<option value="G_CUP_OR_MORE"
+											th:text="#{colleciton.search.cup-size.g_or_more}"></option>
+									</select>
+								</div>
+							</div>
+							<div class="row mt-3 p-2">
+								<div th:object="${categoryDto}"
+									class="col-12 toggle-input-wrapper"
+									data-toggle-name="categories">
+									<label class="form-label" th:text="#{admin.cast-category}"></label>
+									<select class="form-select"
+										th:field="${categoryDto.categoryName}" data-type="dropdown">
+										<option selected disabled th:value="${null}"
+											th:text="#{admin.cast-select-category}">Select
+											Category</option>
+										<option th:each="category : ${categories}"
+											th:value="${category.categoryName}"
+											th:text="${category.categoryName}"></option>
+									</select>
+									<button class="icon-btn" data-type="add" type="button">+</button>
+									<input class="form-control d-none"
+										th:field="${categoryDto.categoryName}"
+										th:value="*{categoryName}" data-type="input"
+										placeholder="Enter new Category"
+										th:classappend="${#fields.hasErrors('categoryName')} ? ' is-invalid'"
+										disabled />
+									<!-- 
+								    <div class="invalid-feedback"
+										th:if="${#fields.hasErrors('categoryName')}"
+										th:errors="*{categoryName}"></div>
+									 -->
+									<button class="icon-btn d-none" data-type="remove"
+										type="button">−</button>
+								</div>
+							</div>
+							<div class="row mt-3 p-2 mb-5">
+								<div class="col-12 mb-5">
+									<label class="form-label" for="descripiton"
+										th:text="#{admin.cast-description}"></label> <input
+										id="hidden-input" type="hidden" th:field="*{description}">
+									<div id="editor" th:utext="*{description}"></div>
+									<div class="invalid-feedback"
+										th:if="${#fields.hasErrors('description')}"
+										th:errors="*{description}">Error</div>
+								</div>
+							</div>
+							<div class="mt-4 mb-0">
+								<button class="btn btn-primary" type="submit"
+									th:if="${formTitle}" th:text="#{${formTitle}}"></button>
+								<button class="btn btn-primary" type="submit"
+									th:unless="${formTitle}" th:text="#{admin.cast.add}"></button>
+							</div>
+						</form>
+					</div>
+
+					<div class="card-footer text-center py-3">
+						<div class="small">
+							<a th:href="@{/{lang}/admin/dashboard(lang=${#locale.language})}"
+								th:text="#{nav.back-to-dashboard}"></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+	</th:block>
+</body>
+
+</html>

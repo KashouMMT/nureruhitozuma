@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
+<head>
+	<!-- ========== ENCODING ========== -->
+	<meta charset="utf-8">
+	
+	<!-- ========== VIEWPORT AND AUTHOR ========== -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="author" content="Nureruhitozuma">
+	
+	<!-- ========== BASIC SEO TAGS ========== -->
+	<th:block th:if="${metaTitle != null && content != 'public/content/item' && content != 'public/content/single-blog'}"><title th:text="#{${metaTitle}}"></title></th:block>
+	<th:block th:if="${metaDescription != null && content != 'public/content/item' && content != 'public/content/single-blog'}"><meta name="description" th:content="#{${metaDescription}}" ></th:block>
+	
+	<th:block th:unless="${metaTitle != null && content != 'public/content/item' && content != 'public/content/single-blog'}"><title th:text="${metaTitle}"></title></th:block>
+	<th:block th:unless="${metaDescription != null && content != 'public/content/item' && content != 'public/content/single-blog'}"><meta name="description" th:content="${metaDescription}" ></th:block>
+	
+	
+	<th:block th:unless="${metaTitle != null}">
+		<title th:text="${metaTitle}"></title>
+	</th:block>
+	<th:block th:unless="${metaDescription != null}">
+		<meta name="description" th:content="${metaDescription}" >
+	</th:block>
+	
+	<!-- ========== OPEN GRAPH (FACEBOOK, LINE, KAKAO, etc.) ========== -->
+	
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="https://nureruhitozuma.com/">
+	<meta property="og:title" content="">
+	<meta property="og:description" content="">
+	<meta property="og:image" content="https://nureruhitozuma.com/favicon.svg">
+	<meta property="og:site_name" content="Nureruhitozuma">
+	<meta property="og:locale" content="ja">
+	
+	<!-- ========== TWITTER CARD ========== -->
+	
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="">
+	<meta name="twitter:description" content="">
+	<meta name="twitter:image" content="https://nureruhitozuma.com/favicon.svg">
+	 
+	<!-- ========== ROBOTS TXT ========== -->
+	<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
+	<!-- ========== SITEMAP ========== -->
+	
+	<meta name="sitemap" content="https://nureruhitozuma.com/sitemap.xml">
+	 
+	<!-- ========== CANONICAL ========== -->
+	<th:block th:if="${canonical != null}">
+		<link rel="canonical" th:href="${'https://nureruhitozuma.com/' + #locale.language + canonical}">
+	</th:block>
+	
+	<!-- ========== JSON-LD ========== 
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Rondo",
+  "url": "https://rondo-thai.com",
+  "image": "https://rondo-thai.com/public/assets/images/logo.png",
+  "description": "バンコク・パタヤで日本人向けの高級出張サービス。日本語対応で安心。",
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "TH",
+    "addressLocality": "Bangkok"
+  },
+  "areaServed": ["Bangkok","Pattaya","Phuket"],
+  "availableLanguage": ["Japanese","English"],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "customer service",
+    "availableLanguage": ["Japanese","English"],
+    "url": "https://lin.ee/33iRvq9"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "Home",
+   "item": "https://rondo-thai.com/ja/home"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "Pricing",
+   "item": "https://rondo-thai.com/ja/home/pricing"
+  },
+  {
+   "@type": "ListItem",
+   "position": 3,
+   "name": "Cast",
+   "item": "https://rondo-thai.com/ja/home/cast"
+  },
+  {
+   "@type": "ListItem",
+   "position": 4,
+   "name": "Newcomers",
+   "item": "https://rondo-thai.com/ja/home/newcomers"
+  },
+  {
+   "@type": "ListItem",
+   "position": 5,
+   "name": "About",
+   "item": "https://rondo-thai.com/ja/home/option-menu"
+  }
+ ]
+}
+</script>
+-->
+
+	<!-- ========== Google Web Fonts ========== -->
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;700&family=Work+Sans:wght@400;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500&family=Sawarabi+Mincho&display=swap" rel="stylesheet">
+	
+	<!-- ========== Icon Font Stylesheet ========== -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" rel="stylesheet" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+	
+	<!-- ========== STYLESHEETS ========== -->
+	<link rel="stylesheet" type="text/css" th:href="@{/public/bootstrap-5.3.7-dist/css/bootstrap.min.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/public/css/style.css}">
+	
+	<link rel="icon" type="image/x-icon" th:href="@{/favicon.svg}">
+</head>
+<body th:attr="data-page=${content == 'public/content/home'} ? 'home' : null">
+	<th:block th:insert="~{public/components/public-navbar}"></th:block>
+	<th:block th:insert="~{${content}}"></th:block>
+	<th:block th:insert="~{public/components/public-footer}"></th:block>
+	<!-- 
+	<div id="sidePopup">
+		<a href="https://t.me/+HZyrd6YCCSI4ZDU1"
+	   		class="chat-float-btn chat-float-telegram-pos shadow-lg" 
+	   		target="_blank" 
+	   		aria-label="Chat on TELEGRAM">
+	   		<i class="bi bi-telegram mt-1"></i>
+		</a>
+		<a href="https://lin.ee/WA9jwLg"
+	   		class="chat-float-btn chat-float-line-pos shadow-lg" 
+	   		target="_blank" 
+	   		aria-label="Chat on LINE">
+	   		<i class="bi bi-line mt-2"></i>
+		</a>
+	</div>
+	-->
+	<!-- ========== SCRIPTS ========== -->
+	<th:block th:insert="~{public/components/public-scripts :: scripts}"></th:block>
+</body>
+</html>

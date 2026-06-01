@@ -1,0 +1,71 @@
+<th:block xmlns:th="http://www.thymeleaf.org" th:fragment="public-newcomer">
+	<div id="wrapper" class="clear subpage-wrapper">
+		<div class="fxnav" data-nav-shell="">
+			<nav data-nav="">
+				<ul class="topnav clear">
+					<li><a th:href="@{/{lang}/home(lang=${#locale.language})}">トップページ</a></li>
+					<li><a th:href="@{/{lang}/home/schedule(lang=${#locale.language})}">本日の出勤</a></li>
+					<li><a th:href="@{/{lang}/home/cast(lang=${#locale.language})}">キャスト一覧</a></li>
+					<li><a th:href="@{/{lang}/home/system(lang=${#locale.language})}">料金システム</a></li>
+					<li><a th:href="@{/{lang}/home/ranking(lang=${#locale.language})}">ランキング</a></li>
+					<li><a class="active" th:href="@{/{lang}/home/newcomer(lang=${#locale.language})}">新人一覧</a></li>
+				</ul>
+			</nav>
+		</div>
+		<div id="contents" data-page-root="">
+			<div id="breadcrumbs">
+				<ol>
+					<li>
+						<a th:href="@{/{lang}/home(lang=${#locale.language})}">
+							<span data-shop-name="">濡れる人妻</span>
+						</a>
+					</li>
+					<li><span>新人一覧</span></li>
+				</ol>
+			</div>
+
+			<div id="newcommer">
+				<h2>New Face</h2>
+				<div class="section">
+					<ul class="lists clear">
+						<li th:each="product : ${products}">
+							<div class="staff">
+								<!-- 
+								<div class="sccom"></div>
+								 -->
+								<div class="photo">
+									<!-- 
+									<div class="snsicon"></div>
+									<div class="boxicon">
+										<p class="newicon">
+											<img th:src="@{/public/assets/images/newicon.png}" alt="新人マーク" />
+										</p>
+										<p class="rankicon"></p>
+									</div>
+									 
+									<p class="ccicon">
+										<img th:src="@{/public/assets/images/class00.png}" alt="" />
+									</p>
+									-->
+									<a th:href="@{/{lang}/home/cast/{id}(lang=${#locale.language},id=${product.id})}">
+										<img th:src="@{/files/{image}(image=${product.getMainProductImage})}"
+										class="staffimg"
+										alt="麻耶" />
+									</a>
+								</div>
+
+								<div class="prof">
+									<h3 th:text="${product.title}">麻耶(32)</h3>
+									<!-- 
+									<p class="size">160/84(D)/57/83</p>
+ 									-->
+									<div th:text="${product.shortDescription}" class="tdcom"></div>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</th:block>

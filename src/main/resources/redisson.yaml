@@ -1,0 +1,6 @@
+singleServerConfig:
+  address: "redis://redis:6379"
+  password: "P@ssword925"
+  database: 0
+threads: 4
+nettyThreads: 4

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<th:block th:fragment="admin-table">
+	<main>
+		<div class="container-fluid px-4">
+			<h1 class="mt-4" th:text="#{nav.cast}"></h1>
+			<ol class="breadcrumb mb-4">
+				<li class="breadcrumb-item"><a
+					th:href="@{/{lang}/admin/dashboard(lang=${#locale.language})}"
+					th:text="#{nav.dashboard}"></a></li>
+				<li class="breadcrumb-item active" th:text="#{admin.cast-table}"></li>
+			</ol>
+			<form
+				class="d-flex flex-column flex-lg-row justify-content-between align-items-start align-items-lg-center mb-2"
+				th:action="@{/{lang}/admin/swap-to(lang=${#locale.language})}"
+				method="POST">
+				<span class="text-nowrap p-2">Move: </span> <select
+					class="form-select p-2" name="from" data-type="dropdown">
+					<option selected th:each="product : ${products}"
+						th:value="${product.id}" th:text="${product.title}"></option>
+				</select> <span class="text-nowrap p-2">To: </span> <select
+					class="form-select p-2 me-2" name="to" data-type="dropdown">
+					<option selected th:each="product,itr : ${products}"
+						th:value="${product.sortOrder}" th:text="${itr.count}"></option>
+				</select>
+				<button class="btn btn-success p-2 text-nowrap" type="submit">Move
+					up/down</button>
+			</form>
+			<div class="card mb-4">
+				<div class="card-header">
+					<i class="fas fa-table me-1"></i><span
+						th:text="#{admin.cast-table}"></span>
+				</div>
+
+				<div class="card-body">
+					<div th:if="${success}" class="alert alert-success" role="alert"
+						th:text="#{${success}}"></div>
+					<div class="table-responsive">
+						<table id="datatablesSimple" class="d-none d-md-block d-lg-block">
+							<thead>
+								<tr>
+									<th></th>
+									<th th:text="#{admin.cast-no}">NO</th>
+									<th th:text="#{admin.cast-id}">ID</th>
+									<th th:text="#{admin.cast-title}">Title</th>
+									<th th:text="#{admin.cast-short-description}">Short
+										Description</th>
+									<th th:text="#{admin.cast-image}">Image</th>
+									<th th:text="#{admin.cast-category}">Category</th>
+									<th th:text="#{admin.cast-description}">Description</th>
+									<th th:text="#{admin.cast-featured}">Featured</th>
+									<th th:text="#{admin.cast-is_newcomer}">Is_Newcomer</th>
+									<th th:text="#{admin.cast-actions}">Actions</th>
+								</tr>
+							</thead>
+							<tfoot>
+								<tr>
+									<th></th>
+									<th th:text="#{admin.cast-id}">NO</th>
+									<th th:text="#{admin.cast-no}">ID</th>
+									<th th:text="#{admin.cast-title}">Title</th>
+									<th th:text="#{admin.cast-short-description}">Short
+										Description</th>
+									<th th:text="#{admin.cast-image}">Image</th>
+									<th th:text="#{admin.cast-category}">Category</th>
+									<th th:text="#{admin.cast-description}">Description</th>
+									<th th:text="#{admin.cast-featured}">Featured</th>
+									<th th:text="#{admin.cast-is_newcomer}">Is_Newcomer</th>
+									<th th:text="#{admin.cast-actions}">Actions</th>
+								</tr>
+							</tfoot>
+							<tbody>
+								<tr th:each="p,itr : ${products}">
+									<td><a
+										th:href="@{/{lang}/admin/sort-up/{productId}(productId=${p.id},lang=${#locale.language})}"
+										class="text-decoration-none">∧</a><br> <a
+										th:href="@{/{lang}/admin/sort-down/{productId}(productId=${p.id},lang=${#locale.language})}"
+										class="text-decoration-none">∨</a></td>
+									<td th:text="${itr.count}"></td>
+									<td th:text="${p.id}"></td>
+									<td th:text="${p.title}"></td>
+									<td th:text="${p.shortDescription}"></td>
+									<td>
+										<ul>
+											<li th:each="i: ${p.productImages}">
+												<div th:if="${i.filename != null}">
+													<span th:text="${i.filename}"></span> <a
+														th:href="@{/files/{fn}(fn=${i.filename})}" target="_blank"><i
+														class="fa-solid fa-magnifying-glass"></i></a> <a
+														th:href="@{/files/{fn}(fn=${i.filename})}"
+														th:download="${i.filename}"
+														class="btn btn-sm btn-outline-primary"> <i
+														class="fa-solid fa-download"></i>
+													</a>
+												</div>
+											</li>
+										</ul>
+									</td>
+									<td
+										th:text="${p.category != null ? p.category.categoryName : '-'}"></td>
+									<td th:utext="${p.description}"></td>
+									<td th:text="${p.featured}"></td>
+									<td th:text="${p.isNewcomer}"></td>
+									<td><a class="fw-semibold hover-glow"
+										th:href="@{/{lang}/admin/edit-product/{id}(id=${p.id},lang=${#locale.language})}">
+											<span th:text="#{admin.edit}"></span>
+									</a> <br> <a class="fw-semibold hover-glow"
+										th:href="@{/{lang}/admin/toggle-featured/{id}(id=${p.id},lang=${#locale.language})}">
+											<span th:text="#{admin.toggle-featured}"></span>
+									</a> <br> <a class="fw-semibold hover-glow"
+										th:href="@{/{lang}/admin/toggle-newcomers/{id}(id=${p.id},lang=${#locale.language})}">
+											<span th:text="#{admin.toggle-newcomer}"></span>
+									</a> <br> <a class="fw-semibold hover-glow"
+										th:href="@{/{lang}/admin/delete-product/{id}(id=${p.id},lang=${#locale.language})}"
+										onclick="return confirm('本当に削除しますか?')"> <span
+											th:text="#{admin.delete}"></span>
+									</a> <br> <a class="fw-semibold hover-glow"
+										th:href="@{/{lang}/home/cast/{productId}(productId=${p.id},lang=${#locale.language})}">
+											<span th:text="#{admin.cast-page}"></span>
+									</a></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="table-responsive d-lg-none">
+						<table id="mobiledatatableSimple">
+							<thead>
+								<tr>
+									<th th:text="#{admin.cast-id}">ID</th>
+									<th th:text="#{admin.cast-title}">Title</th>
+									<th th:text="#{admin.cast-actions}">Actions</th>
+								</tr>
+							</thead>
+							<tfoot>
+								<tr>
+									<th th:text="#{admin.cast-id}">ID</th>
+									<th th:text="#{admin.cast-title}">Title</th>
+									<th th:text="#{admin.cast-actions}">Actions</th>
+								</tr>
+							</tfoot>
+							<tbody>
+								<tr th:each="p : ${products}">
+									<td th:text="${p.id}"></td>
+									<td th:text="${p.title}"></td>
+									<td><a class="fw-semibold hover-glow"
+										th:href="@{/{lang}/admin/edit-product/{id}(id=${p.id},lang=${#locale.language})}">
+											<span th:text="#{admin.edit}"></span>
+									</a> <br> <a class="fw-semibold hover-glow"
+										th:href="@{/{lang}/admin/toggle-featured/{id}(id=${p.id},lang=${#locale.language})}">
+											<span th:text="#{admin.toggle-featured}"></span>
+									</a> <br> <a class="fw-semibold hover-glow"
+										th:href="@{/{lang}/admin/toggle-newcomers/{id}(id=${p.id},lang=${#locale.language})}">
+											<span th:text="#{admin.toggle-newcomer}"></span>
+									</a> <br> <a class="fw-semibold hover-glow"
+										th:href="@{/{lang}/admin/delete-product/{id}(id=${p.id},lang=${#locale.language})}"
+										onclick="return confirm('本当に削除しますか?')"> <span
+											th:text="#{admin.delete}"></span>
+									</a> <br> <a class="fw-semibold hover-glow"
+										th:href="@{/{lang}/home/cast/{productId}(productId=${p.id},lang=${#locale.language})}">
+											<span th:text="#{admin.cast-page}"></span>
+									</a></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="card-footer bg-light border-0 py-4">
+					<a
+						class="btn btn-primary px-5 py-2 shadow-sm fw-semibold rounded-pill hover-glow"
+						th:href="@{/{lang}/admin/add-product(lang=${#locale.language})}">
+						<span th:text="#{admin.cast.add}"></span>
+					</a>
+				</div>
+			</div>
+		</div>
+	</main>
+</th:block>
+</html>

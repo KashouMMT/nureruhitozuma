@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+	<th:block th:fragment="admin-form">
+		<main>
+			<div class="container-fluid px-4">
+				<h1 class="mt-4" th:if="${formTitle}" th:text="#{${formTitle}}"></h1>
+				<h1 class="mt-4" th:unless="${formTitle}"
+					th:text="#{admin.add-admin-user}"></h1>
+				<ol class="breadcrumb mb-4">
+					<li class="breadcrumb-item"><a
+						th:href="@{/{lang}/admin/dashboard(lang=${#locale.language})}"
+						th:text="#{nav.dashboard}"></a></li>
+					<li class="breadcrumb-item"><a
+						th:href="@{/{lang}/admin/user-admin(lang=${#locale.language})}"
+						th:text="#{nav.users}"></a></li>
+					<li class="breadcrumb-item" th:if="${formTitle}"
+						th:text="#{${formTitle}}"></li>
+					<li class="breadcrumb-item" th:unless="${formTitle}"
+						th:text="#{admin.add-admin-user}"></li>
+				</ol>
+				<div class="card shadow-lg border-0 rounded-lg mt-5">
+					<div class="card-header">
+						<h3 class="font-weight-light my-4" th:if="${formTitle}"
+							th:text="#{${formTitle}}"></h3>
+						<h3 class="font-weight-light my-4" th:unless="${formTitle}"
+							th:text="#{admin.add-admin-user}"></h3>
+					</div>
+					<div class="card-body">
+						<div th:if="${success}" class="alert alert-success" role="alert"
+							th:text="#{${success}}"></div>
+						<div th:if="${warn}" class="alert alert-warn" role="alert"
+							th:text="#{${warn}}"></div>
+						<div th:if="${danger}" class="alert alert-danger" role="alert"
+							th:text="#{${danger}}"></div>
+						<form th:action="@{${formAction}}" th:object="${objectDto}"
+							method="post" novalidate>
+							<div class="row mt-3 p-2">
+								<div class="col-12">
+									<label class="form-label" for="title" th:text="'Name'"></label>
+									<input class="form-control" type="text" th:field="*{email}"
+										maxlength=255 required
+										th:classappend="${#fields.hasErrors('email')} ? ' is-invalid'">
+									<div class="invalid-feedback"
+										th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Error</div>
+								</div>
+							</div>
+							<div th:if="${formTitle != null}" class="row mt-3 p-2">
+								<div class="col-12">
+									<label class="form-label" for="title" th:text="'Old Password'"></label>
+									<input class="form-control" type="password"
+										th:field="*{oldPassword}" maxlength=255 required
+										th:classappend="${#fields.hasErrors('oldPassword')} ? ' is-invalid'">
+									<div class="invalid-feedback"
+										th:if="${#fields.hasErrors('oldPassword')}"
+										th:errors="*{oldPassword}">Error</div>
+								</div>
+							</div>
+							<div class="row mt-3 p-2">
+								<div class="col-12">
+									<label class="form-label" for="title" th:text="'New Password'"></label>
+									<input class="form-control" type="password"
+										th:field="*{password}" maxlength=255 required
+										th:classappend="${#fields.hasErrors('password')} ? ' is-invalid'">
+									<div class="invalid-feedback"
+										th:if="${#fields.hasErrors('password')}"
+										th:errors="*{password}">Error</div>
+								</div>
+							</div>
+							<div class="mt-4 mb-0">
+								<button class="btn btn-primary" type="submit"
+									th:if="${formTitle}" th:text="#{${formTitle}}"></button>
+								<button class="btn btn-primary" type="submit"
+									th:unless="${formTitle}" th:text="#{admin.add-admin-user}"></button>
+							</div>
+						</form>
+					</div>
+					<div class="card-footer text-center py-3">
+						<div class="small">
+							<a th:href="@{/{lang}/admin/dashboard(lang=${#locale.language})}"
+								th:text="#{nav.back-to-dashboard}"></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+	</th:block>
+</body>
+</html>

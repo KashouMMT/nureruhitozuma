@@ -1,0 +1,33 @@
+<th:block xmlns:th="http://www.thymeleaf.org" th:fragment="public-blog(blogs,tilte,subTitle)">
+	<!-- Team Start -->
+	<div class="container-fluid py-5">
+		<div class="container py-5">
+			<div class="text-center">
+				<div class="title wow fadeInUp" data-wow-delay="0.1s">
+					<div class="title-center">
+						<h5 th:text="${title}"></h5>
+						<h1 th:text="${subTitle}"></h1>
+					</div>
+				</div>
+			</div>
+			<div th:each="blog : ${blogs}" 
+			class="row wow fadeInUp"
+			data-wow-delay="0.1s">
+				<h5 th:text="${blog.title}" class="text-center text-uppercase mb-0" ></h5>
+				<div class="row">
+					<div class="col-12 col-lg-4">
+						<img
+						class="img-fluid"
+						th:src="@{'/files/' + ${blog.imageName}}"
+						alt=""
+						/>
+					</div>
+					<div class="col-12 col-lg-8">
+						<p th:utext="${blog.content}"></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Team End -->
+</th:block>

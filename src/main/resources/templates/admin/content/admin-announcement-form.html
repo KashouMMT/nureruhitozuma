@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+	<th:block th:fragment="admin-form">
+		<main>
+			<div class="container-fluid px-4">
+				<h1 class="mt-4" th:if="${formTitle}" th:text="#{${formTitle}}"></h1>
+				<h1 class="mt-4" th:unless="${formTitle}"
+					th:text="#{admin.announcement.add}"></h1>
+				<ol class="breadcrumb mb-4">
+					<li class="breadcrumb-item"><a
+						th:href="@{/{lang}/admin/dashboard(lang=${#locale.language})}"
+						th:text="#{nav.dashboard}"></a></li>
+					<li class="breadcrumb-item"><a
+						th:href="@{/{lang}/admin/blog(lang=${#locale.language})}"
+						th:text="#{admin.announcement-table}"></a></li>
+					<li class="breadcrumb-item" th:if="${formTitle}"
+						th:text="#{${formTitle}}"></li>
+					<li class="breadcrumb-item" th:unless="${formTitle}"
+						th:text="#{admin.announcement.add}"></li>
+				</ol>
+				<div class="card shadow-lg border-0 rounded-lg mt-5">
+					<div class="card-header">
+						<h3 class="font-weight-light my-4" th:if="${formTitle}"
+							th:text="#{${formTitle}}"></h3>
+						<h3 class="font-weight-light my-4" th:unless="${formTitle}"
+							th:text="#{admin.announcement.add}"></h3>
+					</div>
+					<div class="card-body">
+						<form id="variantsForm" th:action="@{${formAction}}"
+							th:object="${objectDto}" method="post"
+							enctype="multipart/form-data" novalidate>
+							<div class="row mt-3 p-2">
+								<div class="col-12">
+									<label class="form-label" for="title"
+										th:text="#{admin.announcement.title}"></label> <input
+										class="form-control" type="text" th:field="*{title}"
+										maxlength=255 required
+										th:classappend="${#fields.hasErrors('title')} ? ' is-invalid'">
+									<div class="invalid-feedback"
+										th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Error</div>
+								</div>
+							</div>
+							<div class="row mt-3 p-2 mb-5">
+								<div class="col-12 mb-5">
+									<label class="form-label" for="descripiton"
+										th:text="#{admin.announcement.content}"></label>
+									<textarea class="form-control" th:field="*{content}" rows="8"
+										required
+										th:classappend="${#fields.hasErrors('content')} ? ' is-invalid'"> 
+									</textarea>
+									<div class="invalid-feedback"
+										th:if="${#fields.hasErrors('content')}" th:errors="*{content}">Error</div>
+								</div>
+							</div>
+							<div class="mt-4 mb-0">
+								<button class="btn btn-primary" type="submit"
+									th:if="${formTitle}" th:text="#{${formTitle}}"></button>
+								<button class="btn btn-primary" type="submit"
+									th:unless="${formTitle}" th:text="#{admin.announcement.add}"></button>
+							</div>
+						</form>
+					</div>
+					<div class="card-footer text-center py-3">
+						<div class="small">
+							<a th:href="@{/{lang}/admin/dashboard(lang=${#locale.language})}"
+								th:text="#{nav.back-to-dashboard}"></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+	</th:block>
+</body>
+
+</html>

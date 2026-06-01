@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+	<th:block th:fragment="admin-form">
+		<main>
+			<div class="container-fluid px-4">
+				<h1 class="mt-4" th:if="${formTitle}" th:text="#{${formTitle}}"></h1>
+				<h1 class="mt-4" th:unless="${formTitle}"
+					th:text="#{admin.blog.add}"></h1>
+				<ol class="breadcrumb mb-4">
+					<li class="breadcrumb-item"><a
+						th:href="@{/{lang}/admin/dashboard(lang=${#locale.language})}"
+						th:text="#{nav.dashboard}"></a></li>
+					<li class="breadcrumb-item"><a
+						th:href="@{/{lang}/admin/blog(lang=${#locale.language})}"
+						th:text="#{admin.blog-table}"></a></li>
+					<li class="breadcrumb-item" th:if="${formTitle}"
+						th:text="#{${formTitle}}"></li>
+					<li class="breadcrumb-item" th:unless="${formTitle}"
+						th:text="#{admin.blog.add}"></li>
+				</ol>
+				<div class="card shadow-lg border-0 rounded-lg mt-5">
+					<div class="card-header">
+						<h3 class="font-weight-light my-4" th:if="${formTitle}"
+							th:text="#{${formTitle}}"></h3>
+						<h3 class="font-weight-light my-4" th:unless="${formTitle}"
+							th:text="#{admin.blog.add}"></h3>
+					</div>
+					<div class="card-body">
+						<form id="variantsForm" th:action="@{${formAction}}"
+							th:object="${objectDto}" method="post"
+							enctype="multipart/form-data" novalidate>
+							<div class="row mt-3 p-2" data-component="image-uploader">
+								<label class="form-label fw-semibold mb-2"
+									th:text="#{admin.blog-image}"></label>
+								<!-- Upload box -->
+								<label class="image-upload-box w-100" data-role="dropzone">
+									<span class="d-block fs-3 fw-bold text-secondary">＋</span> <span
+									class="text-muted small" th:text="#{admin.image-instruction}"></span>
+									<input type="file" name="image" accept="image/*" class="d-none"
+									data-role="input">
+								</label>
+
+								<!-- Previews (new selections) -->
+								<div class="d-flex flex-wrap gap-2 mt-2" data-role="preview"></div>
+								<div th:if="${objectDto.imageName != null}">
+									<label class="form-label fw-semibold mb-2 mt-3"
+										th:text="#{admin.blog-post-image}"></label>
+									<div class="product-image-gallery d-flex flex-wrap gap-3 mt-2">
+										<div class="preview-wrapper">
+											<a th:href="@{/files/{fn}(fn=${objectDto.imageName})}"
+												target="_blank" rel="noopener noreferrer"> <img
+												th:src="@{/files/{fn}(fn=${objectDto.imageName})}"
+												alt="Product image" class="preview-image">
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row mt-3 p-2">
+								<div class="col-12">
+									<label class="form-label" for="title" th:text="'Blog Title'"></label>
+									<input class="form-control" type="text" th:field="*{title}"
+										maxlength=255 required
+										th:classappend="${#fields.hasErrors('title')} ? ' is-invalid'">
+									<div class="invalid-feedback"
+										th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Error</div>
+								</div>
+							</div>
+							<div class="row mt-3 p-2 mb-5">
+								<div class="col-12 mb-5">
+									<label class="form-label" for="descripiton"
+										th:text="#{admin.blog-content}"></label> <input
+										id="hidden-input" type="hidden" th:field="*{content}">
+									<div id="editor" th:utext="*{content}"></div>
+									<div class="invalid-feedback"
+										th:if="${#fields.hasErrors('content')}" th:errors="*{content}">Error</div>
+								</div>
+							</div>
+							<div class="mt-4 mb-0">
+								<button class="btn btn-primary" type="submit"
+									th:if="${formTitle}" th:text="#{${formTitle}}"></button>
+								<button class="btn btn-primary" type="submit"
+									th:unless="${formTitle}" th:text="#{admin.blog.add}"></button>
+							</div>
+						</form>
+					</div>
+					<div class="card-footer text-center py-3">
+						<div class="small">
+							<a th:href="@{/{lang}/admin/dashboard(lang=${#locale.language})}"
+								th:text="#{nav.back-to-dashboard}"></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+	</th:block>
+</body>
+
+</html>

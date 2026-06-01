@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<th:block th:fragment="admin-table">
+	<main>
+		<div class="container-fluid px-4">
+			<h1 class="mt-4" th:text="#{nav.categories}"></h1>
+			<ol class="breadcrumb mb-4">
+				<li class="breadcrumb-item"><a
+					th:href="@{/{lang}/admin/dashboard(lang=${#locale.language})}"
+					th:text="#{nav.dashboard}"></a></li>
+				<li class="breadcrumb-item active" th:text="#{admin.category-table}"></li>
+			</ol>
+			<div class="card mb-4">
+				<div class="card-header">
+					<i class="fas fa-table me-1"></i><span
+						th:text="#{admin.cast-table}"></span>
+				</div>
+				<div class="card-body">
+					<div th:if="${success}" class="alert alert-success" role="alert"
+						th:text="#{${success}}"></div>
+					<div th:if="${error}" class="alert alert-danger" role="alert"
+						th:text="#{${error}}"></div>
+					<div class="table-responsive">
+						<table id="datatablesSimple" class="d-none d-md-block d-lg-block">
+							<thead>
+								<tr>
+									<th th:text="#{admin.cast-id}">ID</th>
+									<th th:text="#{admin.category-name}">Category Name</th>
+									<th th:text="#{admin.category-casts}">Casts</th>
+									<th th:text="#{admin.cast-actions}">Actions</th>
+								</tr>
+							</thead>
+							<tfoot>
+								<tr>
+									<th th:text="#{admin.cast-no}">ID</th>
+									<th th:text="#{admin.category-name}">Category Name</th>
+									<th th:text="#{admin.category-casts}">Casts</th>
+									<th th:text="#{admin.cast-actions}">Actions</th>
+								</tr>
+							</tfoot>
+							<tbody>
+								<tr th:each="category : ${categories}">
+									<td th:text="${category.id}"></td>
+									<td th:text="${category.categoryName}"></td>
+									<td>
+										<ul>
+											<li th:each="p: ${category.products}"><span
+												th:text="${p.title}"></span></li>
+										</ul>
+									</td>
+									<td><a class="fw-semibold hover-glow"
+										th:href="@{/{lang}/admin/edit-category/{id}(id=${category.id},lang=${#locale.language})}">
+											<span th:text="#{admin.edit}"></span>
+									</a> <br> <a class="fw-semibold hover-glow"
+										th:href="@{/{lang}/admin/delete-category/{id}(id=${category.id},lang=${#locale.language})}"
+										onclick="return confirm('本当に削除しますか?')"> <span
+											th:text="#{admin.delete}"></span>
+									</a></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="table-responsive d-lg-none">
+						<table id="datatablesSimple">
+							<thead>
+								<tr>
+									<th th:text="#{admin.cast-id}">ID</th>
+									<th th:text="#{admin.category-name}">Category Name</th>
+									<th th:text="#{admin.category-casts}">Casts</th>
+									<th th:text="#{admin.cast-actions}">Actions</th>
+								</tr>
+							</thead>
+							<tfoot>
+								<tr>
+									<th th:text="#{admin.cast-no}">ID</th>
+									<th th:text="#{admin.category-name}">Category Name</th>
+									<th th:text="#{admin.category-casts}">Casts</th>
+									<th th:text="#{admin.cast-actions}">Actions</th>
+								</tr>
+							</tfoot>
+							<tbody>
+								<tr th:each="category : ${categories}">
+									<td th:text="${category.id}"></td>
+									<td th:text="${category.categoryName}"></td>
+									<td>
+										<ul>
+											<li th:each="p: ${category.products}"><span
+												th:text="${p.title}"></span></li>
+										</ul>
+									</td>
+									<td><a class="fw-semibold hover-glow"
+										th:href="@{/{lang}/admin/edit-category/{id}(id=${category.id},lang=${#locale.language})}">
+											<span th:text="#{admin.edit}"></span>
+									</a> <br> <a class="fw-semibold hover-glow"
+										th:href="@{/{lang}/admin/delete-category/{id}(id=${category.id},lang=${#locale.language})}"
+										onclick="return confirm('本当に削除しますか?')"> <span
+											th:text="#{admin.delete}"></span>
+									</a></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="card-footer bg-light border-0 py-4">
+					<a
+						class="btn btn-primary px-5 py-2 shadow-sm fw-semibold rounded-pill hover-glow"
+						th:href="@{/{lang}/admin/add-category(lang=${#locale.language})}">
+						<span th:text="#{admin.category-add}"></span>
+					</a>
+				</div>
+			</div>
+		</div>
+	</main>
+</th:block>
+</html>
