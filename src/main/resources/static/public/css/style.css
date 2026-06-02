@@ -106,6 +106,10 @@ header h1 {
   font-size: 16px;
   font-weight: 400;
   text-align: left;
+  white-space: normal;
+  overflow-wrap: break-word;
+    overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .logo {
@@ -2227,7 +2231,7 @@ footer .copyright {
   	right: 25px;
   	width: 60px;
   	height: 60px;
-  	background-color: #06C755;
+  	background-color: #24A1DE;
 }
 
 .chat-float-line-pos {
