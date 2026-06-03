@@ -28,8 +28,8 @@ xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
 	
 	<meta property="og:type" content="website">
 	<meta property="og:url" content="https://nureruhitozuma.com/">
-	<meta property="og:title" content="">
-	<meta property="og:description" content="">
+	<meta property="og:title" th:content="#{${metaTitle}}">
+	<meta property="og:description" th:content="#{${metaDescription}}">
 	<meta property="og:image" content="https://nureruhitozuma.com/favicon.svg">
 	<meta property="og:site_name" content="Nureruhitozuma">
 	<meta property="og:locale" content="ja">
@@ -37,8 +37,8 @@ xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
 	<!-- ========== TWITTER CARD ========== -->
 	
 	<meta name="twitter:card" content="summary_large_image">
-	<meta name="twitter:title" content="">
-	<meta name="twitter:description" content="">
+	<meta name="twitter:title" th:content="#{${metaTitle}}">
+	<meta name="twitter:description" th:content="#{${metaDescription}}">
 	<meta name="twitter:image" content="https://nureruhitozuma.com/favicon.svg">
 	 
 	<!-- ========== ROBOTS TXT ========== -->
